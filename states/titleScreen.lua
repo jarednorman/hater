@@ -5,9 +5,9 @@ local timeElapsed
 
 local getMessage = function()
   if timeElapsed < 1.5 then
-    return "a game by\nJared Norman"
+    return 'a game by\nJared Norman'
   else
-    return "HATER"
+    return 'HATER'
   end
 end
 
@@ -32,6 +32,11 @@ return function(dt, initial)
     end
 
     love.graphics.setColor(colours.white())
-    love.graphics.print(getMessage())
+    love.graphics.printf(
+      getMessage(),
+      0, 0,
+      love.graphics.getWidth() / 2,
+      'center'
+    )
   end }
 end
