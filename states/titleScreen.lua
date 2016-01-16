@@ -1,5 +1,6 @@
 local colours = require 'colours'
 local setState = require('state').setState
+local to_array = require('underscore').to_array
 
 local timeElapsed
 
@@ -9,6 +10,12 @@ local getMessage = function()
   else
     return 'HATER'
   end
+end
+
+local getMessageHeight = function()
+  local lineHeight = love.graphics.getFont():getHeight()
+  local lines = 1 + #to_array(getMessage():gmatch('\n'))
+  return lines * lineHeight
 end
 
 return function(dt, initial)
@@ -34,9 +41,12 @@ return function(dt, initial)
     love.graphics.setColor(colours.white())
     love.graphics.printf(
       getMessage(),
-      0, 0,
+      0, love.graphics.getHeight() / 4,
       love.graphics.getWidth() / 2,
-      'center'
+      'center',
+      0,
+      1, 1,
+      0, getMessageHeight() / 4
     )
   end }
 end
